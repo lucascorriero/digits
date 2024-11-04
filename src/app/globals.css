@@ -7,6 +7,7 @@ body {
   box-sizing: border-box;
   height: 100%;
   padding: 0;
+  color: white !important;
   margin: 0;
   background: fixed center url("/irina-iriser-2Y4dE8sdhlc-unsplash.jpg");
   background-size: cover;
@@ -21,7 +22,7 @@ body .navbar {
 :root {
   --nat-navbar-bg: darkblue;
   --nat-navbar-bg-color: darkblue;
-  --nat-navbar-text-color: white;
+  --nat-navbar-text-color: white !important;
   --nat-navbar-text-highlight: lightgrey;
   --nat-navbar-highlight-bh: lightblue;
 }
