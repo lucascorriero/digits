@@ -9,16 +9,16 @@ import { redirect } from 'next/navigation';
 import { addNote } from '@/lib/dbActions';
 import LoadingSpinner from '@/components/LoadingSpinner';
 import { AddNoteSchema } from '@/lib/validationSchemas';
+import { Contact } from '@prisma/client';
 
 const onSubmit = async (data: { note: string; owner: string; contactId: number }) => {
-  await addNote(data); // No 'createdAt' needed here
+  await addNote(data);
   swal('Success', 'Your Note has been added', 'success', {
-      timer: 2000,
+    timer: 2000,
   });
 };
 
-
-const AddContactForm: React.FC = () => {
+const AddNoteForm = ({ contact }: { contact: Contact }) => {
   const { data: session, status } = useSession();
   // console.log('AddStuffForm', status, session);
   const currentUser = session?.user?.email || '';
@@ -42,68 +42,25 @@ const AddContactForm: React.FC = () => {
       <Row className="justify-content-center">
         <Col xs={5}>
           <Col className="text-center">
-            <h2>Add Contact</h2>
+            <h2>Add Note</h2>
           </Col>
           <Card>
+            <Card.Header>
+              Add Timestamped Note
+            </Card.Header>
             <Card.Body>
               <Form onSubmit={handleSubmit(onSubmit)}>
-                <Row>
-                  <Col>
-                    <Form.Group>
-                      <Form.Label>First Name</Form.Label>
-                      <input
-                        type="text"
-                        {...register('firstName')}
-                        className={`form-control ${errors.firstName ? 'is-invalid' : ''}`}
-                      />
-                      <div className="invalid-feedback">{errors.firstName?.message}</div>
-                    </Form.Group>
-                  </Col>
-                  <Col>
-                    <Form.Group>
-                      <Form.Label>Last Name</Form.Label>
-                      <input
-                        type="number"
-                        {...register('lastName')}
-                        className={`form-control ${errors.lastName ? 'is-invalid' : ''}`}
-                      />
-                      <div className="invalid-feedback">{errors.lastName?.message}</div>
-                    </Form.Group>
-                  </Col>
-                </Row>
-                <Row>
-                  <Col>
-                    <Form.Group>
-                      <Form.Label>Address</Form.Label>
-                      <input
-                        type="text"
-                        {...register('address')}
-                        className={`form-control ${errors.address ? 'is-invalid' : ''}`}
-                      />
-                      <div className="invalid-feedback">{errors.address?.message}</div>
-                    </Form.Group>
-                  </Col>
-                  <Col>
-                    <Form.Group>
-                      <Form.Label>Image</Form.Label>
-                      <input
-                        type="number"
-                        {...register('image')}
-                        className={`form-control ${errors.image ? 'is-invalid' : ''}`}
-                      />
-                      <div className="invalid-feedback">{errors.image?.message}</div>
-                    </Form.Group>
-                  </Col>
-                </Row>
                 <Form.Group>
-                  <Form.Label>Description</Form.Label>
-                  <textarea
-                    {...register('description')}
-                    className={`form-control ${errors.description ? 'is-invalid' : ''}`}
+                  <Form.Label>Note</Form.Label>
+                  <input
+                    type="text"
+                    {...register('note')}
+                    className={`form-control ${errors.note ? 'is-invalid' : ''}`}
                   />
-                  <div className="invalid-feedback">{errors.description?.message}</div>
+                  <div className="invalid-feedback">{errors.note?.message}</div>
                 </Form.Group>
                 <input type="hidden" {...register('owner')} value={currentUser} />
+                <input type="hidden" {...register('contactId')} value={contact.id} />
                 <Form.Group className="form-group">
                   <Row className="pt-3">
                     <Col>
@@ -127,4 +84,4 @@ const AddContactForm: React.FC = () => {
   );
 };
 
-export default AddContactForm;
+export default AddNoteForm;

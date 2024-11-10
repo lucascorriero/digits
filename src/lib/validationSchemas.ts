@@ -18,9 +18,9 @@ export const AddContactSchema = Yup.object({
 });
 
 export const AddNoteSchema = Yup.object({
-  note: Yup.string().required(),
-  contactId: Yup.number().required(),
-  owner: Yup.string().required(),
+  note: Yup.string().required('Note is required'),
+  contactId: Yup.number().required('Contact ID is required'),
+  owner: Yup.string().required('Owner is required'),
 });
 
 export const EditStuffSchema = Yup.object({

@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Card, Image, ListGroup } from 'react-bootstrap';
 import { Contact, Note } from '@prisma/client';
 import NoteItem from '@/components/NoteItem';
+import AddNoteForm from './AddNoteForm';
 
 const ContactCard = ({ contact, notes }: { contact: Contact, notes: Note[] }) => (
   <Card className="h-100">
@@ -24,6 +25,7 @@ const ContactCard = ({ contact, notes }: { contact: Contact, notes: Note[] }) =>
           <ListGroup variant="flush">
             {notes.map((note) => <NoteItem key={note.id} note={note} />)}
           </ListGroup>
+          <AddNoteForm contact={contact} />
         </Card.Text>
       </Card.Body>
     </Card.Header>

@@ -31,13 +31,13 @@ export async function addStuff(stuff: { name: string; quantity: number; owner: s
   redirect('/list');
 }
 
-export async function addNote(note: { note: string; owner:string; contactId: number, createAt: Date }) {
+export async function addNote(note: { note: string; contactId: number; owner: string }) {
   await prisma.note.create({
     data: {
       note: note.note,
       contactId: note.contactId,
       owner: note.owner,
-      createdAt: new Date(),
+      createdAt: new Date(), // Setting createdAt here
     },
   });
   redirect('/list');
