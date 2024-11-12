@@ -57,10 +57,12 @@ Click “List Contacts” to view all your contacts and add timestamped notes ab
 
 #### Edit Contacts
 
-
+<img src = "Screenshot 2024-11-11 at 10.47.52 PM.png">
 
 From the List Contacts page, click “Edit” next to any contact to modify their information.
 
 #### Admin Mode
+
+<img src = "admin-landing-page.png">
 
 You can set up one or more users as “Admins” in the settings file, granting them access to view all contacts associated with every user.
