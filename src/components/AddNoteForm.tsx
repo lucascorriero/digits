@@ -20,7 +20,6 @@ const onSubmit = async (data: { note: string; owner: string; contactId: number }
 
 const AddNoteForm = ({ contact }: { contact: Contact }) => {
   const { data: session, status } = useSession();
-  // console.log('AddStuffForm', status, session);
   const currentUser = session?.user?.email || '';
   const {
     register,
@@ -39,47 +38,40 @@ const AddNoteForm = ({ contact }: { contact: Contact }) => {
 
   return (
     <Container className="py-3">
-      <Row className="justify-content-center">
-        <Col xs={5}>
-          <Col className="text-center">
-            <h2>Add Note</h2>
-          </Col>
-          <Card>
-            <Card.Header>
-              Add Timestamped Note
-            </Card.Header>
-            <Card.Body>
-              <Form onSubmit={handleSubmit(onSubmit)}>
-                <Form.Group>
-                  <Form.Label>Note</Form.Label>
-                  <input
-                    type="text"
-                    {...register('note')}
-                    className={`form-control ${errors.note ? 'is-invalid' : ''}`}
-                  />
-                  <div className="invalid-feedback">{errors.note?.message}</div>
-                </Form.Group>
-                <input type="hidden" {...register('owner')} value={currentUser} />
-                <input type="hidden" {...register('contactId')} value={contact.id} />
-                <Form.Group className="form-group">
-                  <Row className="pt-3">
-                    <Col>
-                      <Button type="submit" variant="primary">
-                        Submit
-                      </Button>
-                    </Col>
-                    <Col>
-                      <Button type="button" onClick={() => reset()} variant="warning" className="float-right">
-                        Reset
-                      </Button>
-                    </Col>
-                  </Row>
-                </Form.Group>
-              </Form>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+      <Card>
+        <Card.Header>
+          Add Timestamped Note
+        </Card.Header>
+        <Card.Body>
+          <Form onSubmit={handleSubmit(onSubmit)}>
+            <Form.Group>
+              <Form.Label>Note</Form.Label>
+              <input
+                type="text"
+                {...register('note')}
+                className={`form-control ${errors.note ? 'is-invalid' : ''}`}
+              />
+              <div className="invalid-feedback">{errors.note?.message}</div>
+            </Form.Group>
+            <input type="hidden" {...register('owner')} value={currentUser} />
+            <input type="hidden" {...register('contactId')} value={contact.id} />
+            <Form.Group className="form-group">
+              <Row className="pt-3">
+                <Col>
+                  <Button type="submit" variant="primary">
+                    Submit
+                  </Button>
+                </Col>
+                <Col>
+                  <Button type="button" onClick={() => reset()} variant="warning" className="float-right">
+                    Reset
+                  </Button>
+                </Col>
+              </Row>
+            </Form.Group>
+          </Form>
+        </Card.Body>
+      </Card>
     </Container>
   );
 };
